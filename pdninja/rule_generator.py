@@ -1,21 +1,65 @@
+# Inspired/taken from the zircolite project
+# A big thanks to @wagga40
+
 from sigma.collection import SigmaCollection
 from sigma.pipelines.sysmon import sysmon_pipeline
-from sigma.pipelines.windows import windows_logsoure_pipeline, windows_audit_pipeline
+from sigma.pipelines.windows import windows_logsource_pipeline, windows_audit_pipeline
 from sigma.processing.resolver import ProcessingPipelineResolver
 from sigma.backends.pd_df import pd_df
 
+import multiprocessing as mp
+from pathlib import Path
+import json
+import sys
+import functools
+
+# Paths
+rules_path = r"./sigma/rules/windows/"
+ruleset_name_sysmon = "rules_windows_sysmon_pysigma.json"
+ruleset_name_windows = "rules_windows_generic_pysigma.json"
+
 def convert_rule(backend, rule):
-    try:
-        return backend.convert_rule(rule, "pdninja")[0]
+    try: 
+        return backend.convert_rule(rule)[0]
     except Exception as e:
         print(e)
 
 def ruleset_generator(name, output_filename, input_rules, pipelines):
-    print (f'''[+] Initialisation ruleset : {name} ''')
-    piperesolver = ProcessingPipelineResolver()
 
+    print(f'[+] Initialisation ruleset : {name}')
+    # Create the pipeline resolver
+    piperesolver = ProcessingPipelineResolver()
+    # Add pipelines
     for pipeline in pipelines:
-        piperesolver.add_pipeline_class(pipeline)
+        piperesolver.add_pipeline_class(pipeline) # Sysmon handling 
+    # Create a single sorted and prioritzed pipeline
+    combined_pipeline = piperesolver.resolve(piperesolver.pipelines)
+    # Instantiate backend, using our resolved pipeline
+    pd_df_backend = pd_df.PandasDataFramePythonBackend(combined_pipeline)
+
+    rules = Path(input_rules)
+    if rules.is_dir():
+        pattern = f"*.yml"
+        rule_list = list(rules.rglob(pattern))
+    else:
+        sys.exit(f"Log path {rules} is not a directory")
     
-    combined_piepline = piperesolver.resolve(piperesolver.pipelines)
-    pd_df_backend = pd_df.PandasDataFramePythonBackend(combined_piepline)
+    rule_collection = SigmaCollection.load_ruleset(rule_list)
+
+    ruleset = []
+
+    print(f'[+] Conversion : {name}')
+
+    pool = mp.Pool()
+    ruleset = pool.map(functools.partial(convert_rule, pd_df_backend), rule_collection)
+    pool.close()
+    pool.join()
+
+    ruleset = [rule for rule in ruleset if rule is not None] # Removing empty results
+    #ruleset = sorted(ruleset, key=lambda d: d['level']) # Sorting by level
+    with open(output_filename, 'w') as outfile:
+        json.dump(ruleset, outfile, indent=4, ensure_ascii=True)
+
+if __name__ == '__main__':
+    ruleset_generator("sysmon", ruleset_name_sysmon, rules_path, [sysmon_pipeline(), windows_logsource_pipeline()])
+    ruleset_generator("generic", ruleset_name_windows, rules_path, [windows_audit_pipeline(), windows_logsource_pipeline()])
