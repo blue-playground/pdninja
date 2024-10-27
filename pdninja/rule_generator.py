@@ -20,7 +20,7 @@ ruleset_name_windows = "rules_windows_generic_pysigma.json"
 
 def convert_rule(backend, rule):
     try: 
-        return backend.convert_rule(rule)[0]
+        return backend.convert_rule(rule, "min_pdninja")[0]
     except Exception as e:
         print(e)
 
