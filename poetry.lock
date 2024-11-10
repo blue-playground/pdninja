@@ -281,13 +281,13 @@ files = [
 
 [[package]]
 name = "packaging"
-version = "24.1"
+version = "24.2"
 description = "Core utilities for Python packages"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "packaging-24.1-py3-none-any.whl", hash = "sha256:5b8f2217dbdbd2f7f384c41c628544e6d52f2d0f53c6d0c3ea61aa5d1d7ff124"},
-    {file = "packaging-24.1.tar.gz", hash = "sha256:026ed72c8ed3fcce5bf8950572258698927fd1dbda10a5e981cdf0ac37f4f002"},
+    {file = "packaging-24.2-py3-none-any.whl", hash = "sha256:09abb1bccd265c01f4a3aa3f7a7db064b36514d2cba19a2f694fe6150451a759"},
+    {file = "packaging-24.2.tar.gz", hash = "sha256:c228a6dc5e932d346bc5739379109d49e8853dd8223571c7c5b55260edc0b97f"},
 ]
 
 [[package]]
@@ -307,13 +307,13 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "publicsuffixlist"
-version = "1.0.2.20241026"
+version = "1.0.2.20241108"
 description = "publicsuffixlist implement"
 optional = false
 python-versions = ">=3.5"
 files = [
-    {file = "publicsuffixlist-1.0.2.20241026-py2.py3-none-any.whl", hash = "sha256:e2576f23f2d6017b1fb70a669101665a3bab7872bd0238f44feef071f8752b1c"},
-    {file = "publicsuffixlist-1.0.2.20241026.tar.gz", hash = "sha256:bc24c7b391c55b6d5ded6d06fd6f76ba003617d25ba84e88c261c71dbeab754b"},
+    {file = "publicsuffixlist-1.0.2.20241108-py2.py3-none-any.whl", hash = "sha256:d0cafa3e9502e7452fa2a5c34ce7ae949fe73111c53904339291099f4892f18a"},
+    {file = "publicsuffixlist-1.0.2.20241108.tar.gz", hash = "sha256:3acba2ac9dbc2a628f9e39edc17c3ac6b3ca097ef0bbf88679e5ffcc8a5feaa7"},
 ]
 
 [package.extras]
@@ -381,13 +381,13 @@ requests = ">=2.31,<3.0"
 
 [[package]]
 name = "pysigma-backend-pd-df"
-version = "0.2.0"
+version = "0.3.0"
 description = "pySigma Pandas DataFrame Python backend"
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "pysigma_backend_pd_df-0.2.0-py3-none-any.whl", hash = "sha256:cffdc46b0b6101ebe36148aa6949c38466908c02dfc3cb397ac65ed4bbc03106"},
-    {file = "pysigma_backend_pd_df-0.2.0.tar.gz", hash = "sha256:3f3f5a3d2fc7db63a34a5b65fb29ec1d4024dcdc2eb69df1e166f16da610c4b6"},
+    {file = "pysigma_backend_pd_df-0.3.0-py3-none-any.whl", hash = "sha256:ad8ec64a866aef2501de0d284a15e14382b8d55bbf13c31b3c8987eb634bd35b"},
+    {file = "pysigma_backend_pd_df-0.3.0.tar.gz", hash = "sha256:b9786e5f73b66db549b85d7992744b1a35457e00d9e4b0d05a2ab1a155b3e89c"},
 ]
 
 [package.dependencies]
@@ -662,4 +662,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "29c403ff5e408127899b3b6974b41870e4ea8606cd807eaa785c68b50662eb7a"
+content-hash = "2e9364ee6949519ec19cef4b14cd29db79de08391dc4d26ab88d14bfeefaf7d9"

@@ -8,7 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 pysigma = "^0.11.14"
-pysigma-backend-pd-df = "^0.2.0"
+pysigma-backend-pd-df = "^0.3.0"
 pysigma-pipeline-sysmon = "^1.0.4"
 pysigma-pipeline-windows = "^1.2.0"
 pymisp = "^2.5.0"
