@@ -354,7 +354,7 @@
     {
         "title": "HackTool Named File Stream Created",
         "id": "19b041f6-e583-40dc-b842-d6fa8011493f",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects the creation of a named file stream with the imphash of a well-known hack tool",
         "tags": [
             "attack.defense-evasion",
@@ -434,7 +434,7 @@
     {
         "title": "Potential Direct Syscall of NtOpenProcess",
         "id": "3f3f3506-1895-401b-9cc3-e86b16e630d0",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects potential calls to NtOpenProcess directly from NTDLL.",
         "tags": [
             "attack.execution",
@@ -1605,7 +1605,7 @@
     {
         "title": "Suspicious Wordpad Outbound Connections",
         "id": "786cdae8-fefb-4eb2-9227-04e34060db01",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects a network connection initiated by \"wordpad.exe\" over uncommon destination ports.\nThis might indicate potential process injection activity from a beacon or similar mechanisms.\n",
         "tags": [
             "attack.defense-evasion",
@@ -1785,7 +1785,7 @@
     {
         "title": "HackTool - EDRSilencer Execution",
         "id": "eb2d07d4-49cb-4523-801a-da002df36602",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects the execution of EDRSilencer, a tool that leverages Windows Filtering Platform (WFP) to block Endpoint Detection and Response (EDR) agents from reporting security events to the server based on PE metadata information.\n",
         "tags": [
             "attack.defense-evasion",
@@ -3475,7 +3475,7 @@
         }
     },
     {
-        "title": "Suspicious Schtasks From Env Var Folder",
+        "title": "Schedule Task Creation From Env Variable Or Potentially Suspicious Path Via Schtasks.EXE",
         "id": "81325ce1-be01-4250-944f-b4789644556f",
         "status": "test",
         "description": "Detects Schtask creations that point to a suspicious folder or an environment variable often used by malware",
@@ -3485,7 +3485,7 @@
         ],
         "level": "medium",
         "rule": [
-            "Channel=='Security' & EventID==4688 & (NewProcessName.str.endswith('\\\\schtasks.exe') & CommandLine.str.contains(' /create ') & (CommandLine.str.contains(':\\\\Perflogs') | CommandLine.str.contains(':\\\\Windows\\\\Temp') | CommandLine.str.contains('\\\\AppData\\\\Local\\\\') | CommandLine.str.contains('\\\\AppData\\\\Roaming\\\\') | CommandLine.str.contains('\\\\Users\\\\Public') | CommandLine.str.contains('%AppData%') | CommandLine.str.contains('%Public%')) | ParentCommandLine.str.endswith('\\\\svchost.exe -k netsvcs -p -s Schedule') & (CommandLine.str.contains(':\\\\Perflogs') | CommandLine.str.contains(':\\\\Windows\\\\Temp') | CommandLine.str.contains('\\\\Users\\\\Public') | CommandLine.str.contains('%Public%'))) & ~ (CommandLine.str.contains('update_task.xml') | CommandLine.str.contains('/Create /TN TVInstallRestore /TR') | ParentCommandLine.str.contains('unattended.ini') | CommandLine.str.contains('/Create /Xml \"C:\\\\Users\\\\') & CommandLine.str.contains('\\\\AppData\\\\Local\\\\Temp\\\\.CR.') & CommandLine.str.contains('Avira_Security_Installation.xml') | CommandLine.str.contains('/Create /F /TN') & CommandLine.str.contains('/Xml ') & CommandLine.str.contains('\\\\AppData\\\\Local\\\\Temp\\\\is-') & CommandLine.str.contains('Avira_') & (CommandLine.str.contains('.tmp\\\\UpdateFallbackTask.xml') | CommandLine.str.contains('.tmp\\\\WatchdogServiceControlManagerTimeout.xml') | CommandLine.str.contains('.tmp\\\\SystrayAutostart.xml') | CommandLine.str.contains('.tmp\\\\MaintenanceTask.xml')) | CommandLine.str.contains('\\\\AppData\\\\Local\\\\Temp\\\\') & CommandLine.str.contains('/Create /TN \"klcp_update\" /XML ') & CommandLine.str.contains('\\\\klcp_update_task.xml'))"
+            "Channel=='Security' & EventID==4688 & (NewProcessName.str.endswith('\\\\schtasks.exe') & CommandLine.str.contains(' /create ') & (CommandLine.str.contains(':\\\\Perflogs') | CommandLine.str.contains(':\\\\Users\\\\All Users\\\\') | CommandLine.str.contains(':\\\\Users\\\\Default\\\\') | CommandLine.str.contains(':\\\\Users\\\\Public') | CommandLine.str.contains(':\\\\Windows\\\\Temp') | CommandLine.str.contains('\\\\AppData\\\\Local\\\\') | CommandLine.str.contains('\\\\AppData\\\\Roaming\\\\') | CommandLine.str.contains('%AppData%') | CommandLine.str.contains('%Public%')) | ParentCommandLine.str.endswith('\\\\svchost.exe -k netsvcs -p -s Schedule') & (CommandLine.str.contains(':\\\\Perflogs') | CommandLine.str.contains(':\\\\Windows\\\\Temp') | CommandLine.str.contains('\\\\Users\\\\Public') | CommandLine.str.contains('%Public%'))) & ~ (ParentCommandLine.str.contains('unattended.ini') | CommandLine.str.contains('update_task.xml') | CommandLine.str.contains('/Create /TN TVInstallRestore /TR') | CommandLine.str.contains('/Create /Xml \"C:\\\\Users\\\\') & CommandLine.str.contains('\\\\AppData\\\\Local\\\\Temp\\\\.CR.') & CommandLine.str.contains('Avira_Security_Installation.xml') | CommandLine.str.contains('/Create /F /TN') & CommandLine.str.contains('/Xml ') & CommandLine.str.contains('\\\\AppData\\\\Local\\\\Temp\\\\is-') & CommandLine.str.contains('Avira_') & (CommandLine.str.contains('.tmp\\\\UpdateFallbackTask.xml') | CommandLine.str.contains('.tmp\\\\WatchdogServiceControlManagerTimeout.xml') | CommandLine.str.contains('.tmp\\\\SystrayAutostart.xml') | CommandLine.str.contains('.tmp\\\\MaintenanceTask.xml')) | CommandLine.str.contains('\\\\AppData\\\\Local\\\\Temp\\\\') & CommandLine.str.contains('/Create /TN \"klcp_update\" /XML ') & CommandLine.str.contains('\\\\klcp_update_task.xml'))"
         ],
         "logsource": {
             "product": "windows",
@@ -8142,7 +8142,7 @@
     {
         "title": "Binary Proxy Execution Via Dotnet-Trace.EXE",
         "id": "9257c05b-4a4a-48e5-a670-b7b073cf401b",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects commandline arguments for executing a child process via dotnet-trace.exe",
         "tags": [
             "attack.execution",
@@ -9375,7 +9375,7 @@
     {
         "title": "Uncommon System Information Discovery Via Wmic.EXE",
         "id": "9d5a1274-922a-49d0-87f3-8c653483b909",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects the use of the WMI command-line (WMIC) utility to identify and display various system information,\nincluding OS, CPU, GPU, and disk drive names; memory capacity; display resolution; and baseboard, BIOS,\nand GPU driver products/versions.\nSome of these commands were used by Aurora Stealer in late 2022/early 2023.\n",
         "tags": [
             "attack.discovery",
@@ -10303,7 +10303,7 @@
     {
         "title": "Firewall Configuration Discovery Via Netsh.EXE",
         "id": "0e4164da-94bc-450d-a7be-a4b176179f1f",
-        "status": "experimental",
+        "status": "test",
         "description": "Adversaries may look for details about the network configuration and settings of systems they access or through information discovery of remote systems",
         "tags": [
             "attack.discovery",
@@ -11253,7 +11253,7 @@
     {
         "title": "Uncommon Child Process Of Conhost.EXE",
         "id": "7dc2dedd-7603-461a-bc13-15803d132355",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects uncommon \"conhost\" child processes. This could be a sign of \"conhost\" usage as a LOLBIN or potential process injection activity.",
         "tags": [
             "attack.defense-evasion",
@@ -11549,7 +11549,7 @@
     {
         "title": "Potentially Suspicious Desktop Background Change Using Reg.EXE",
         "id": "8cbc9475-8d05-4e27-9c32-df960716c701",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects the execution of \"reg.exe\" to alter registry keys that would replace the user's desktop background.\nThis is a common technique used by malware to change the desktop background to a ransom note or other image.\n",
         "tags": [
             "attack.defense-evasion",
@@ -12581,7 +12581,7 @@
     {
         "title": "Compressed File Creation Via Tar.EXE",
         "id": "418a3163-3247-4b7b-9933-dcfcb7c52ea9",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects execution of \"tar.exe\" in order to create a compressed file.\nAdversaries may abuse various utilities to compress or encrypt data before exfiltration.\n",
         "tags": [
             "attack.collection",
@@ -12938,7 +12938,7 @@
     {
         "title": "Renamed Cloudflared.EXE Execution",
         "id": "e0c69ebd-b54f-4aed-8ae3-e3467843f3f0",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects the execution of a renamed \"cloudflared\" binary.",
         "tags": [
             "attack.command-and-control",
@@ -13216,7 +13216,7 @@
     {
         "title": "Cloudflared Quick Tunnel Execution",
         "id": "222129f7-f4dc-4568-b0d2-22440a9639ba",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects creation of an ad-hoc Cloudflare Quick Tunnel, which can be used to tunnel local services such as HTTP, RDP, SSH and SMB.\nThe free TryCloudflare Quick Tunnel will generate a random subdomain on trycloudflare[.]com, following a call to api[.]trycloudflare[.]com.\nThe tool has been observed in use by threat groups including Akira ransomware.\n",
         "tags": [
             "attack.command-and-control",
@@ -14122,7 +14122,7 @@
     {
         "title": "Cloudflared Portable Execution",
         "id": "fadb84f0-4e84-4f6d-a1ce-9ef2bffb6ccd",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects the execution of the \"cloudflared\" binary from a non standard location.\n",
         "tags": [
             "attack.command-and-control",
@@ -14887,7 +14887,7 @@
     {
         "title": "Suspicious Process Execution From Fake Recycle.Bin Folder",
         "id": "5ce0f04e-3efc-42af-839d-5b3a543b76c0",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects process execution from a fake recycle bin folder, often used to avoid security solution.",
         "tags": [
             "attack.persistence",
@@ -14967,7 +14967,7 @@
     {
         "title": "Cloudflared Tunnel Execution",
         "id": "9a019ffc-3580-4c9d-8d87-079f7e8d3fd4",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects execution of the \"cloudflared\" tool to connect back to a tunnel. This was seen used by threat actors to maintain persistence and remote access to compromised networks.",
         "tags": [
             "attack.command-and-control",
@@ -15301,7 +15301,7 @@
     {
         "title": "Forfiles.EXE Child Process Masquerading",
         "id": "f53714ec-5077-420e-ad20-907ff9bb2958",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects the execution of \"forfiles\" from a non-default location, in order to potentially spawn a custom \"cmd.exe\" from the current working directory.\n",
         "tags": [
             "attack.defense-evasion",
@@ -17003,7 +17003,7 @@
     {
         "title": "Suspicious Greedy Compression Using Rar.EXE",
         "id": "afe52666-401e-4a02-b4ff-5d128990b8cb",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects RAR usage that creates an archive from a suspicious folder, either a system folder or one of the folders often used by attackers for staging purposes",
         "tags": [
             "attack.execution",
@@ -17314,7 +17314,7 @@
     {
         "title": "Compressed File Extraction Via Tar.EXE",
         "id": "bf361876-6620-407a-812f-bfe11e51e924",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects execution of \"tar.exe\" in order to extract compressed file.\nAdversaries may abuse various utilities in order to decompress data to avoid detection.\n",
         "tags": [
             "attack.collection",
@@ -19670,7 +19670,7 @@
     {
         "title": "Cloudflared Tunnel Connections Cleanup",
         "id": "7050bba1-1aed-454e-8f73-3f46f09ce56a",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects execution of the \"cloudflared\" tool with the tunnel \"cleanup\" flag in order to cleanup tunnel connections.",
         "tags": [
             "attack.command-and-control",
@@ -20391,7 +20391,7 @@
     {
         "title": "Cscript/Wscript Potentially Suspicious Child Process",
         "id": "b6676963-0353-4f88-90f5-36c20d443c6a",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects potentially suspicious child processes of Wscript/Cscript. These include processes such as rundll32 with uncommon exports or PowerShell spawning rundll32 or regsvr32.\nMalware such as Pikabot and Qakbot were seen using similar techniques as well as many others.\n",
         "tags": [
             "attack.execution"
@@ -21043,7 +21043,7 @@
     {
         "title": "Potentially Suspicious Command Targeting Teams Sensitive Files",
         "id": "d2eb17db-1d39-41dc-b57f-301f6512fa75",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects a commandline containing references to the Microsoft Teams database or cookies files from a process other than Teams.\nThe database might contain authentication tokens and other sensitive information about the logged in accounts.\n",
         "tags": [
             "attack.credential-access",
@@ -21904,7 +21904,7 @@
     {
         "title": "PUA - Process Hacker Execution",
         "id": "811e0002-b13b-4a15-9d00-a613fce66e42",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects the execution of Process Hacker based on binary metadata information (Image, Hash, Imphash, etc).\nProcess Hacker is a tool to view and manipulate processes, kernel options and other low level options.\nThreat actors abused older vulnerable versions to manipulate system processes.\n",
         "tags": [
             "attack.defense-evasion",
@@ -22587,7 +22587,7 @@
     {
         "title": "HackTool - EfsPotato Named Pipe Creation",
         "id": "637f689e-b4a5-4a86-be0e-0100a0a33ba2",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects the pattern of a pipe name as used by the hack tool EfsPotato",
         "tags": [
             "attack.defense-evasion",
@@ -22691,7 +22691,7 @@
     {
         "title": "Cloudflared Tunnels Related DNS Requests",
         "id": "a1d9eec5-33b2-4177-8d24-27fe754d0812",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects DNS requests to Cloudflared tunnels domains.\nAttackers can abuse that feature to establish a reverse shell or persistence on a machine.\n",
         "tags": [
             "attack.command-and-control",
@@ -26991,7 +26991,7 @@
     {
         "title": "HackTool - NoFilter Execution",
         "id": "7b14c76a-c602-4ae6-9717-eff868153fc0",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects execution of NoFilter, a tool for abusing the Windows Filtering Platform for privilege escalation via hardcoded policy name indicators\n",
         "tags": [
             "attack.privilege-escalation",
@@ -27773,7 +27773,7 @@
     {
         "title": "Potentially Suspicious AccessMask Requested From LSASS",
         "id": "4a1b6da0-d94f-4fc3-98fc-2d9cb9e5ee76",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects process handle on LSASS process with certain access mask",
         "tags": [
             "attack.credential-access",
@@ -30493,7 +30493,7 @@
     {
         "title": "Potential Persistence Via AppCompat RegisterAppRestart Layer",
         "id": "b86852fb-4c77-48f9-8519-eb1b2c308b59",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects the setting of the REGISTERAPPRESTART compatibility layer on an application.\nThis compatibility layer allows an application to register for restart using the \"RegisterApplicationRestart\" API.\nThis can be potentially abused as a persistence mechanism.\n",
         "tags": [
             "attack.persistence",
@@ -30585,7 +30585,7 @@
     {
         "title": "Potentially Suspicious Desktop Background Change Via Registry",
         "id": "85b88e05-dadc-430b-8a9e-53ff1cd30aae",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects registry value settings that would replace the user's desktop background.\nThis is a common technique used by malware to change the desktop background to a ransom note or other image.\n",
         "tags": [
             "attack.defense-evasion",
@@ -31524,7 +31524,7 @@
     {
         "title": "Potential PowerShell Execution Policy Tampering",
         "id": "fad91067-08c5-4d1a-8d8c-d96a21b37814",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects changes to the PowerShell execution policy in order to bypass signing requirements for script execution",
         "tags": [
             "attack.defense-evasion"
@@ -32967,7 +32967,7 @@
     {
         "title": "Enable LM Hash Storage",
         "id": "c420410f-c2d8-4010-856b-dffe21866437",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects changes to the \"NoLMHash\" registry value in order to allow Windows to store LM Hashes.\nBy setting this registry value to \"0\" (DWORD), Windows will be allowed to store a LAN manager hash of your password in Active Directory and local SAM databases.\n",
         "tags": [
             "attack.defense-evasion",
@@ -33355,6 +33355,24 @@
         "level": "medium",
         "rule": [
             "Channel=='Security' & EventID==4657 & OperationType=='Existing registry value modified' & TargetObject.str.contains('\\\\SOFTWARE\\\\Wow6432Node\\\\Microsoft\\\\Windows\\\\CurrentVersion') & (TargetObject.str.contains('\\\\ShellServiceObjectDelayLoad') | TargetObject.str.contains('\\\\Run\\\\') | TargetObject.str.contains('\\\\RunOnce\\\\') | TargetObject.str.contains('\\\\RunOnceEx\\\\') | TargetObject.str.contains('\\\\RunServices\\\\') | TargetObject.str.contains('\\\\RunServicesOnce\\\\') | TargetObject.str.contains('\\\\Explorer\\\\ShellServiceObjects') | TargetObject.str.contains('\\\\Explorer\\\\ShellIconOverlayIdentifiers') | TargetObject.str.contains('\\\\Explorer\\\\ShellExecuteHooks') | TargetObject.str.contains('\\\\Explorer\\\\SharedTaskScheduler') | TargetObject.str.contains('\\\\Explorer\\\\Browser Helper Objects')) & ~ (NewValue=='(Empty)' | NewProcessName.str.contains('C:\\\\Program Files (x86)\\\\Microsoft\\\\EdgeUpdate\\\\Install\\\\{') & NewProcessName.str.contains('\\\\setup.exe') | NewProcessName=='C:\\\\Program Files\\\\Common Files\\\\Microsoft Shared\\\\ClickToRun\\\\OfficeClickToRun.exe' & TargetObject.str.contains('\\\\Office\\\\ClickToRun\\\\REGISTRY\\\\MACHINE\\\\Software\\\\Wow6432Node\\\\') | (NewProcessName==['C:\\\\Program Files\\\\Microsoft Office\\\\root\\\\integration\\\\integrator.exe', 'C:\\\\Program Files (x86)\\\\Microsoft Office\\\\root\\\\integration\\\\integrator.exe']) & TargetObject.str.contains('\\\\Explorer\\\\Browser Helper Objects\\\\{31D09BA0-12F5-4CCE-BE8A-2923E76605DA}\\\\') | NewValue.str.endswith('-A251-47B7-93E1-CDD82E34AF8B}') | NewValue=='grpconv -o' | NewValue.str.contains('C:\\\\Program Files') & NewValue.str.contains('\\\\Dropbox\\\\Client\\\\Dropbox.exe') & NewValue.str.contains(' /systemstartup') | TargetObject.str.endswith('\\\\Explorer\\\\Browser Helper Objects\\\\{92EF2EAD-A7CE-4424-B0DB-499CF856608E}\\\\NoExplorer') | NewProcessName.str.contains('\\\\windowsdesktop-runtime-') & (TargetObject.str.endswith('\\\\WOW6432Node\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\RunOnce\\\\{e2d1ae32-dd1d-4ad7-a298-10e42e7840fc}') | TargetObject.str.endswith('\\\\WOW6432Node\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\RunOnce\\\\{7037b699-7382-448c-89a7-4765961d2537}')) & NewValue.str.startswith('\"C:\\\\ProgramData\\\\Package Cache\\\\') & NewValue.str.endswith('.exe\" /burn.runonce') | (NewProcessName.str.startswith('C:\\\\Program Files\\\\Common Files\\\\Microsoft Shared\\\\ClickToRun\\\\') | NewProcessName.str.startswith('C:\\\\Program Files\\\\Common Files\\\\Microsoft Shared\\\\ClickToRun\\\\Updates\\\\')) & NewProcessName.str.endswith('\\\\OfficeClickToRun.exe') | NewValue.str.startswith('\"C:\\\\ProgramData\\\\Package Cache\\\\{d21a4f20-968a-4b0c-bf04-a38da5f06e41}\\\\windowsdesktop-runtime-') | NewProcessName.str.endswith('\\\\VC_redist.x64.exe') & NewValue.str.endswith('}\\\\VC_redist.x64.exe\" /burn.runonce') | (NewProcessName.str.startswith('C:\\\\ProgramData\\\\Package Cache') | NewProcessName.str.startswith('C:\\\\Windows\\\\Temp\\\\')) & (NewProcessName.str.contains('\\\\winsdksetup.exe') | NewProcessName.str.contains('\\\\windowsdesktop-runtime-') | NewProcessName.str.contains('\\\\AspNetCoreSharedFrameworkBundle-')) & NewValue.str.endswith(' /burn.runonce') | NewProcessName.str.startswith('C:\\\\Windows\\\\Installer\\\\MSI') & TargetObject.str.contains('\\\\Explorer\\\\Browser Helper Objects') | NewProcessName=='C:\\\\WINDOWS\\\\system32\\\\msiexec.exe' & TargetObject.str.contains('\\\\SOFTWARE\\\\Wow6432Node\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run\\\\'))"
+        ],
+        "logsource": {
+            "product": "windows",
+            "service": "security"
+        }
+    },
+    {
+        "title": "Potentially Suspicious Command Executed Via Run Dialog Box - Registry",
+        "id": "a7df0e9e-91a5-459a-a003-4cde67c2ff5d",
+        "status": "test",
+        "description": "Detects execution of commands via the run dialog box on Windows by checking values of the \"RunMRU\" registry key.\nThis technique was seen being abused by threat actors to deceive users into pasting and executing malicious commands, often disguised as CAPTCHA verification steps.\n",
+        "tags": [
+            "attack.execution",
+            "attack.t1059.001"
+        ],
+        "level": "high",
+        "rule": [
+            "Channel=='Security' & EventID==4657 & OperationType=='Existing registry value modified' & TargetObject.str.contains('\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\RunMRU') & ((NewValue.str.contains('powershell') | NewValue.str.contains('pwsh')) & (NewValue.str.contains(' -e ') | NewValue.str.contains(' -ec ') | NewValue.str.contains(' -en ') | NewValue.str.contains(' -enc ') | NewValue.str.contains(' -enco') | NewValue.str.contains('ftp') | NewValue.str.contains('Hidden') | NewValue.str.contains('http') | NewValue.str.contains('iex') | NewValue.str.contains('Invoke-')) | NewValue.str.contains('wmic') & (NewValue.str.contains('shadowcopy') | NewValue.str.contains('process call create')))"
         ],
         "logsource": {
             "product": "windows",
@@ -34227,7 +34245,7 @@
     {
         "title": "PSScriptPolicyTest Creation By Uncommon Process",
         "id": "1027d292-dd87-4a1a-8701-2abe04d7783c",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects the creation of the \"PSScriptPolicyTest\" PowerShell script by an uncommon process. This file is usually generated by Microsoft Powershell to test against Applocker.",
         "tags": [
             "attack.defense-evasion"
@@ -34541,7 +34559,7 @@
     {
         "title": "Uncommon File Created In Office Startup Folder",
         "id": "a10a2c40-2c4d-49f8-b557-1a946bc55d9d",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects the creation of a file with an uncommon extension in an Office application startup folder",
         "tags": [
             "attack.resource-development",
@@ -35491,7 +35509,7 @@
     {
         "title": "Suspicious File Creation Activity From Fake Recycle.Bin Folder",
         "id": "cd8b36ac-8e4a-4c2f-a402-a29b8fbd5bca",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects file write event from/to a fake recycle bin folder that is often used as a staging directory for malware",
         "tags": [
             "attack.persistence",
@@ -35725,16 +35743,16 @@
         }
     },
     {
-        "title": "RDP File Creation From Suspicious Application",
+        "title": ".RDP File Created By Uncommon Application",
         "id": "fccfb43e-09a7-4bd2-8b37-a5a7df33386d",
         "status": "test",
-        "description": "Detects Rclone config file being created",
+        "description": "Detects creation of a file with an \".rdp\" extension by an application that doesn't commonly create such files.\n",
         "tags": [
             "attack.defense-evasion"
         ],
         "level": "high",
         "rule": [
-            "(Image.str.endswith('\\\\brave.exe') | Image.str.endswith('\\\\CCleaner Browser\\\\Application\\\\CCleanerBrowser.exe') | Image.str.endswith('\\\\chromium.exe') | Image.str.endswith('\\\\firefox.exe') | Image.str.endswith('\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe') | Image.str.endswith('\\\\iexplore.exe') | Image.str.endswith('\\\\microsoftedge.exe') | Image.str.endswith('\\\\msedge.exe') | Image.str.endswith('\\\\Opera.exe') | Image.str.endswith('\\\\Vivaldi.exe') | Image.str.endswith('\\\\Whale.exe') | Image.str.endswith('\\\\Outlook.exe') | Image.str.endswith('\\\\RuntimeBroker.exe') | Image.str.endswith('\\\\Thunderbird.exe') | Image.str.endswith('\\\\Discord.exe') | Image.str.endswith('\\\\Keybase.exe') | Image.str.endswith('\\\\msteams.exe') | Image.str.endswith('\\\\Slack.exe') | Image.str.endswith('\\\\teams.exe')) & TargetFilename.str.contains('.rdp')"
+            "TargetFilename.str.endswith('.rdp') & (Image.str.endswith('\\\\brave.exe') | Image.str.endswith('\\\\CCleaner Browser\\\\Application\\\\CCleanerBrowser.exe') | Image.str.endswith('\\\\chromium.exe') | Image.str.endswith('\\\\firefox.exe') | Image.str.endswith('\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe') | Image.str.endswith('\\\\iexplore.exe') | Image.str.endswith('\\\\microsoftedge.exe') | Image.str.endswith('\\\\msedge.exe') | Image.str.endswith('\\\\Opera.exe') | Image.str.endswith('\\\\Vivaldi.exe') | Image.str.endswith('\\\\Whale.exe') | Image.str.endswith('\\\\olk.exe') | Image.str.endswith('\\\\Outlook.exe') | Image.str.endswith('\\\\RuntimeBroker.exe') | Image.str.endswith('\\\\Thunderbird.exe') | Image.str.endswith('\\\\Discord.exe') | Image.str.endswith('\\\\Keybase.exe') | Image.str.endswith('\\\\msteams.exe') | Image.str.endswith('\\\\Slack.exe') | Image.str.endswith('\\\\teams.exe'))"
         ],
         "logsource": {
             "category": "file_event",
@@ -36048,6 +36066,24 @@
             "category": "file_event",
             "product": "windows",
             "source": "/root/pdninja/sigma/rules/windows/file/file_event/file_event_win_office_addin_persistence.yml"
+        }
+    },
+    {
+        "title": ".RDP File Created by Outlook Process",
+        "id": "f748c45a-f8d3-4e6f-b617-fe176f695b8f",
+        "status": "experimental",
+        "description": "Detects the creation of files with the \".rdp\" extensions in the temporary directory that Outlook uses when opening attachments.\nThis can be used to detect spear-phishing campaigns that use RDP files as attachments.\n",
+        "tags": [
+            "attack.defense-evasion"
+        ],
+        "level": "high",
+        "rule": [
+            "TargetFilename.str.endswith('.rdp') & (TargetFilename.str.contains('\\\\AppData\\\\Local\\\\Packages\\\\Microsoft.Outlook_') | TargetFilename.str.contains('\\\\AppData\\\\Local\\\\Microsoft\\\\Olk\\\\Attachments\\\\') | TargetFilename.str.contains('\\\\AppData\\\\Local\\\\Microsoft\\\\Windows\\\\') & TargetFilename.str.contains('\\\\Content.Outlook\\\\'))"
+        ],
+        "logsource": {
+            "category": "file_event",
+            "product": "windows",
+            "source": "/root/pdninja/sigma/rules/windows/file/file_event/file_event_win_office_outlook_rdp_file_creation.yml"
         }
     },
     {
@@ -39981,7 +40017,7 @@
     {
         "title": "Tamper Windows Defender - PSClassic",
         "id": "ec19ebab-72dc-40e1-9728-4c0b805d722c",
-        "status": "experimental",
+        "status": "test",
         "description": "Attempting to disable scheduled scanning and other parts of Windows Defender ATP or set default actions to allow.",
         "tags": [
             "attack.defense-evasion",
@@ -41827,25 +41863,6 @@
         }
     },
     {
-        "title": "Powershell Exfiltration Over SMTP",
-        "id": "9a7afa56-4762-43eb-807d-c3dc9ffe211b",
-        "status": "test",
-        "description": "Adversaries may steal data by exfiltrating it over an un-encrypted network protocol other than that of the existing command and control channel.\nThe data may also be sent to an alternate network location from the main command and control server.\n",
-        "tags": [
-            "attack.exfiltration",
-            "attack.t1048.003"
-        ],
-        "level": "medium",
-        "rule": [
-            "(Channel==['Microsoft-Windows-PowerShell/Operational', 'PowerShellCore/Operational']) & EventID==4104 & ScriptBlockText.str.contains('Send-MailMessage') & ~ ScriptBlockText.str.contains('CmdletsToExport')"
-        ],
-        "logsource": {
-            "category": "ps_script",
-            "product": "windows",
-            "service": "powershell"
-        }
-    },
-    {
         "title": "Suspicious X509Enrollment - Ps Script",
         "id": "504d63cb-0dba-4d02-8531-e72981aace2c",
         "status": "test",
@@ -43100,7 +43117,7 @@
     {
         "title": "Tamper Windows Defender - ScriptBlockLogging",
         "id": "14c71865-6cd3-44ae-adaa-1db923fae5f2",
-        "status": "experimental",
+        "status": "test",
         "description": "Detects PowerShell scripts attempting to disable scheduled scanning and other parts of Windows Defender ATP or set default actions to allow.",
         "tags": [
             "attack.defense-evasion",
