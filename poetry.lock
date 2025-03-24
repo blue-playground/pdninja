@@ -368,14 +368,14 @@ requests = ">=2.31,<3.0"
 
 [[package]]
 name = "pysigma-backend-pd-df"
-version = "0.5.0"
+version = "0.6.0"
 description = "pySigma Pandas DataFrame Python backend"
 optional = false
 python-versions = "<4.0,>=3.8"
 groups = ["main"]
 files = [
-    {file = "pysigma_backend_pd_df-0.5.0-py3-none-any.whl", hash = "sha256:7372c26d0341914c836b754949898314b4a0e8e29a5a3110c3c4ad020bbe82f3"},
-    {file = "pysigma_backend_pd_df-0.5.0.tar.gz", hash = "sha256:43d9aa9a978fa57141363ede07ae9380bb2bd75eb91022f7f68f50ee9d472526"},
+    {file = "pysigma_backend_pd_df-0.6.0-py3-none-any.whl", hash = "sha256:5c3990d1a9754fa70af9fd3910241542bd3bcc1ec1c9d2fc8a43f031c18cf44b"},
+    {file = "pysigma_backend_pd_df-0.6.0.tar.gz", hash = "sha256:716eee332f78786d64c5dc708e9297e59c602b2ad82576195b5f684b93cd509d"},
 ]
 
 [package.dependencies]
@@ -700,4 +700,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.10"
-content-hash = "508d553d8f6d9bdee0158349f56023926426a4041be62d22ea163a55db2057e1"
+content-hash = "e5d039d353bb1ee0b35a54d504a3810900221178186622e1018c598cb6b3316d"
