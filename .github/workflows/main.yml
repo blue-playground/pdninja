@@ -1,0 +1,57 @@
+name: Update Sigma Rules
+
+on:
+  # Run the action manually when required.
+  workflow_dispatch:
+  # Run everytime I update the code in the main branch.
+  push:
+    branches:
+      - "main"
+  schedule:
+  # Run the update automatically at 9 AM IST.
+    - cron: '30 2 * * *'
+
+jobs:
+  check_and_run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          
+      - name: Setup Python
+        uses: action/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Poetry
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+
+      - name: Configure Poetry
+        run: poetry config virtualenvs.create false
+
+      - name: Install Dependencies
+        run: poetry install
+
+      - name: Get changed files in submodule
+        id: changed_files
+        run: |
+          if [[ -n "${GITHTUB_EVENT_PATH}"" ]]; then
+            echo "[+] Checking for changes in sigma repository..."
+            previous_commit = $(git rev-parse HEAD^1)
+            changed_files = $(git diff --name-only "$previous_commit" HEAD -- ./sigma/rules/windows/)
+            echo "changed_files<<EOF"" >> "$GITHUB_OUTPUT"
+            echo "$changed_files" >> "$GITHUB_OUTPUT"
+            echo "EOF" >> "$GITHUB_OUTPUT"
+          else
+            echo "No previous commit found (likely a new push). Skipping submodule change detection"
+            echo "changed_files=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Generate rules on updated sigmas
+        if: steps.changed_files.outputs.changed_files != ''
+        run: poetry run rules/rule_generator.py
+  
